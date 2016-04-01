@@ -1,4 +1,4 @@
-# MSL Account Data Client
+# MSL Catalog Edge
 
 This repository is a sub-repository of the [Kenzan Million Song Library](https://github.com/kenzanmedia/million-song-library) (MSL) project, a microservices-based Web application built using [AngularJS](https://angularjs.org/), a [Cassandra](http://cassandra.apache.org/) NoSQL database, and [Netflix OSS](http://netflix.github.io/) tools.
 
@@ -6,21 +6,27 @@ This repository is a sub-repository of the [Kenzan Million Song Library](https:/
 
 ## Overview
 
-Instead of a traditional edge/middle architecture, the Million Song Library project uses a simplified edge/data client architecture.
-
-The data clients are JARs, each one containing the methods and data transfer objects (DTOs) needed to access all of the tables in a Cassandra cluster.
-
-To enhance scalability and configuration flexibility, the Cassandra tables are split into three independent clusters: account, catalog, and rating. Each of these clusters has a data client JAR dedicated to accessing it: account-data-client, catalog-data-client, and rating-data-client, respectively. This means that a microservice that needs to access Cassandra data will include one or more of the data client JARs.
+You can run build all of the MSL microservices by running `mvn clean compile` from the `server` directory of the main [million-song-library](https://github.com/kenzanmedia/million-song-library/tree/develop/server) repository. Or use the commands below to build, run, and test a single microservice.
 
 > **NOTE:** If you receive an error when running any of the commands below, try using `sudo` (Mac and Linux) or run PowerShell as an administrator (Windows).
 
-## Packaging and Installation
+## Server Generation
 
-Use the following command to package and compile the application code:
+Use the following command to generate server source code from the Swagger definition, run tests, and install dependencies:
 
 ```
-mvn clean package && mvn -P install compile
+mvn -P build clean generate-sources install
 ```
+
+Use the following command to run the server on port `9003`:
+
+```
+mvn -P dev clean jetty:run
+```
+
+To verify that the server is running, first [start Cassandra](https://github.com/kenzanmedia/million-song-library/tree/develop/tools/cassandra), and then access the following URL:
+
+http://msl.kenzanlabs.com:9003/catalog-edge/browse/album
 
 ## Code Formatting
 
@@ -30,7 +36,27 @@ If you make changes to the application code, use the following command to format
 mvn clean formatter:format
 ```
 
+## Dependencies
+
+Use the following command to install dependencies without running tests:
+
+```
+mvn -P no-tests clean install
+```
+
+## JAR Packaging
+
+Use the following command to package the application code:
+
+```
+mvn -P no-tests package
+```
+
 ## Testing and Reports
+
+You can use either Cobertura or EclEmma to run tests, whichever you prefer.
+
+### Cobertura
 
 Use the following command to run all unit tests and generate a report on test coverage (report is located in `/target/site/cobertura/index.html`):
 
@@ -38,9 +64,10 @@ Use the following command to run all unit tests and generate a report on test co
 mvn cobertura:cobertura
 ```
 
-Use the following command to run all unit tests without generating a report:
+### EclEmma 
+
+Use the following command to run all unit tests and generate a report on test coverage (report is located in `/target/site/jacoco`):
 
 ```
-mvn test
+mvn package
 ```
-
