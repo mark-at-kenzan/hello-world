@@ -1,45 +1,47 @@
-# Kenzan Million Song Library
+# MSL Account Data Client
 
-The Million Song Library (MSL) project is a microservices-based Web application built using [AngularJS](https://angularjs.org/), a [Cassandra](http://cassandra.apache.org/) NoSQL database, and several [Netflix OSS](http://netflix.github.io/) tools such as Karyon, Zuul, and Eureka.
+This repository is a sub-repository of the [Kenzan Million Song Library](https://github.com/kenzanmedia/million-song-library) (MSL) project, a microservices-based Web application built using [AngularJS](https://angularjs.org/), a [Cassandra](http://cassandra.apache.org/) NoSQL database, and [Netflix OSS](http://netflix.github.io/) tools.
 
-At [Kenzan](http://kenzan.com/), we created the Million Song Library project to demonstrate the advantages of a microservices architecture, as well as the flexibility and capability offered by the Netflix OSS components when paired with a Cassandra database. However, the MSL project is more than just a demonstration. It also provides a foundation on which database-driven applications can be rapidly developed, tested, and deployed to the cloud.
+> **NOTE:** For an overview of the Million Song Library microservices architecture, as well as step-by-step instructions for running the MSL demonstration, see the [Million Song Library Project Documentation](https://github.com/kenzanmedia/million-song-library/tree/develop/docs).
 
-To learn more about the MSL microservices architecture and the tools we used to build it, see the [Million Song Library Project Documentation](https://github.com/kenzanmedia/million-song-library/tree/develop/docs).
+## Overview
 
-## Getting Started
+Instead of a traditional edge/middle architecture, the Million Song Library project uses a simplified edge/data client architecture.
 
-You can run the Million Song Library demonstration locally on a Mac, Linux, or Windows computer. Or deploy it to [Amazon Web Services](https://aws.amazon.com/) (AWS) and run it on an EC2 instance.
+The data clients are JARs, each one containing the methods and data transfer objects (DTOs) needed to access all of the tables in a Cassandra cluster.
 
-There are three ways to run the Million Song Library demonstration:
+To enhance scalability and configuration flexibility, the Cassandra tables are split into three independent clusters: account, catalog, and rating. Each of these clusters has a data client JAR dedicated to accessing it: account-data-client, catalog-data-client, and rating-data-client, respectively. This means that a microservice that needs to access Cassandra data will include one or more of the data client JARs.
 
-- **Automated Setup** – Uses the `setup.sh` script (located in the `/common` directory) to automate much of the setup process. This is the quickest method for running the MSL demonstration locally on a Mac, Linux, or Windows system.
+> **NOTE:** If you receive an error when running any of the commands below, try using `sudo` (Mac and Linux) or run PowerShell as an administrator (Windows).
 
-- **Manual Setup** – Also runs the MSL demonstration locally on a Mac, Linux, or Windows system. This method takes more time but lets you control how the various tools are installed on your system.
+## Packaging and Installation
 
-- **AWS Setup** – Deploys the MSL demonstration to an EC2 instance on AWS. This method uses [Vagrant](https://www.vagrantup.com/) to automate the cloud deployment process.
+Use the following command to package and compile the application code:
 
-For step-by-step instructions for each setup method, see the [Million Song Library Project Documentation](https://github.com/kenzanmedia/million-song-library/tree/develop/docs).
+```
+mvn clean package && mvn -P install compile
+```
 
-## Documentation
+## Code Formatting
 
-Use the following resources (located in the `/docs` directory) to learn more about the Kenzan Million Song Library:
+If you make changes to the application code, use the following command to format the code according to [project styles and standards](https://github.com/kenzanmedia/styleguide):
 
-- [**Million Song Library Project Documentation**](https://github.com/kenzanmedia/million-song-library/tree/develop/docs) – Overview of the Million Song Library microservice-based architecture as well as step-by-step instructions for running the MSL demonstration locally or deploying it to AWS.
+```
+mvn clean formatter:format
+```
 
-- [**API Documentation**](https://github.com/kenzanmedia/million-song-library/blob/develop/docs/swagger/index.html) – Million Song Library API documentation, generated using Swagger.
+## Testing and Reports
 
-- [**Service Documentation**](https://github.com/kenzanmedia/million-song-library/tree/develop/docs) – Description of the classes and methods for each Million Song Library microservice, generated using Javadoc.
+Use the following command to run all unit tests and generate a test coverage report:
 
-- [**Client/UI Documentation**](https://github.com/kenzanmedia/million-song-library/tree/develop/docs) – Classes, functions, and variables for the Million Song Library client/UI, generated using ESDoc.
+```
+mvn cobertura:cobertura
+```
 
-- [**CSS Style Guide**](https://github.com/kenzanmedia/million-song-library/tree/develop/docs) – CSS styles used in the Million Song Library client/UI, generated using KSS.
+> **NOTE:** The generated report is located in `/target/site/cobertura/index.html`.
 
-## License
+Use the following command to run all unit tests without generating a report:
 
-© 2016 Kenzan Media, LLC.
-
-The Kenzan Million Song Library project is licensed under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
-
-## Support
-
-If you have questions about the Million Song Library demonstration, feel free to drop us a line at <support_msl@kenzan.com>.
+```
+mvn test
+```
