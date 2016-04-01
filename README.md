@@ -1,52 +1,27 @@
-# Kenzan Million Song Library Setup
+# Kenzan Million Song Library Documentation
 
-The setup script automates the process of running the Million Song Library demonstration locally on a Mac, Linux, or Windows system. For detailed prerequisites as well as step-by-step instructions, see the [Million Song Library Project Documentation](https://github.com/kenzanmedia/million-song-library/tree/develop/docs) (located in the `../docs` directory).
+Use the following resources (located in the `/docs` directory) to learn more about the Kenzan Million Song Library:
 
-- [Java 1.8 JDK](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) is required.
-- Windows users must install [Chocolatey](https://chocolatey.org/).
-- Mac users must install [Xcode](https://developer.apple.com/xcode/download/) and [enable the root user](https://support.apple.com/en-us/HT204012).
-- Install and start [Cassandra 2.1.11](https://downloads.datastax.com/community/) before running setup.
-- [Maven 3.3.9](http://www.tutorialspoint.com/maven/maven_environment_setup.htm), [Node 0.12.x](https://nodejs.org/en/download/), and [npm 2.7.x](https://nodejs.org/en/download/) or higher are recommended.
+- [**Million Song Library Project Documentation**](https://github.com/kenzanmedia/million-song-library/tree/develop/docs) – Overview of the Million Song Library microservice-based architecture as well as step-by-step instructions for running the MSL demonstration locally or deploying it to AWS.
 
-## Running Setup
+- [**API Documentation**](https://github.com/kenzanmedia/million-song-library/blob/develop/docs/swagger/index.html) – Million Song Library API documentation, generated using Swagger.
 
-To run setup:
+- [**Service Documentation**](https://github.com/kenzanmedia/million-song-library/tree/develop/docs) – Description of the classes and methods for each Million Song Library microservice, generated using Javadoc.
 
-1. Change to the `/million-song-library/common` directory.
-2. *(Mac and Linux only)* Make the setup script executable:
-   
-   ```
-   chmod +x setup.sh
-   ```
-   
-3. Run the setup script:
+- [**Client/UI Documentation**](https://github.com/kenzanmedia/million-song-library/tree/develop/docs) – Classes, functions, and variables for the Million Song Library client/UI, generated using ESDoc.
 
-   - *Linux:* `sudo ./setup.sh <options>`
-   
-   - *Mac:* `./setup.sh <options>`
-   
-   - *Windows:* `.\setup.ps1 <options>`
-   
-   Where the possible options are:
+- [**CSS Style Guide**](https://github.com/kenzanmedia/million-song-library/tree/develop/docs) – CSS styles used in the Million Song Library client/UI, generated using KSS.
 
-   - `-s | --server` builds the server
-   - `-g | --git` updates and pull Git sources and sub-modules
-   - `-n | --node` updates Node and Bower resources
-   - `-c cassandra-path | --cassandra path` builds the Cassandra keyspace and loads data (Cassandra must be running)
-   - `--default` runs everything except Cassandra
-   - *For example:* `sudo ./setup.sh -c ~/cassandra/dsc-cassandra-2.1.11 -n -s -g`
+## Viewing AsciiDoc Documentation
 
-4. Change to the the `/million-song-library/msl-pages` directory.
-5. Start the application front end:
-   
-   ```
-   npm run full-dev
-   ```
-   
-6. Start the server instances:
+The Million Song Library project documentation is written using [AsciiDoc](http://www.methods.co.nz/asciidoc/), a plain-text markup format for authoring documentation. The documentation was rendered to HTML and PDF formats using the [Asciidoctor](http://asciidoctor.org/) and [Asciidoctor-pdf processors](https://github.com/asciidoctor/asciidoctor-pdf).
 
-   - *Linux:* `sudo npm run serve-all`
-   
-   - *Mac or Windows:* `npm run serve-all`
-   
-7. Open a Web browser and point it to: `msl.kenzanlabs.com:3000`
+Alternately, you can use the [Asciidoctor.js Live Preview](https://chrome.google.com/webstore/detail/asciidoctorjs-live-previe/iaalpfgpbocpdfblpnhhgllgbdbchmia) extension for Chrome to view AsciiDoc (.adoc) files without rendering them.
+
+1. In Chrome, install the [Asciidoctor.js Live Preview](https://chrome.google.com/webstore/detail/asciidoctorjs-live-previe/iaalpfgpbocpdfblpnhhgllgbdbchmia) extension.
+
+2. Navigate to the **chrome://extensions/** page (or select **Menu > More Tools > Extensions**).
+
+3. Under the **Asciidoctor.js Live Preview** extension, select the **Allow access to file URLs** checkbox.
+
+4. To view a local AsciiDoc (.adoc) file, open it in Chrome, or drag the file into the Chrome window.
