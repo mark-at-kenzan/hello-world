@@ -13,7 +13,7 @@ The setup script automates the process of running the Million Song Library demon
 To run setup:
 
 1. Change to the `/million-song-library/common` directory.
-2. (Mac and Linux only) Make the setup script executable:
+2. *(Mac and Linux only)* Make the setup script executable:
    
    ```
    chmod +x setup.sh
@@ -29,11 +29,11 @@ To run setup:
    
    Where the possible options are:
 
-   - **`-s | --server`** builds the server
-   - **`-g | --git`** updates and pull Git sources and sub-modules
-   - **`-n | --node`** updates Node and Bower resources
-   - **`-c cassandra-path | --cassandra path`** builds the Cassandra keyspace and loads data (Cassandra must be running)
-   - **`--default`** runs everything except Cassandra
+   - `-s | --server` builds the server
+   - `-g | --git` updates and pull Git sources and sub-modules
+   - `-n | --node` updates Node and Bower resources
+   - `-c cassandra-path | --cassandra path` builds the Cassandra keyspace and loads data (Cassandra must be running)
+   - `--default` runs everything except Cassandra
    - *For example:* `sudo ./setup.sh -c ~/cassandra/dsc-cassandra-2.1.11 -n -s -g`
 
 4. Change to the the `/million-song-library/msl-pages` directory.
