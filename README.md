@@ -32,7 +32,7 @@ mvn clean formatter:format
 
 ## Testing and Reports
 
-Use the following command to run all unit tests and generate a test coverage report (located in `/target/site/cobertura/index.html`):
+Use the following command to run all unit tests and generate a report on test coverage (report is located in `/target/site/cobertura/index.html`):
 
 ```
 mvn cobertura:cobertura
