@@ -1,27 +1,30 @@
-# Kenzan Million Song Library Documentation
+# Starting Cassandra
 
-Use the following resources (located in the `/docs` directory) to learn more about the Kenzan Million Song Library:
+Start the Cassandra database before you start the Million Song Library application front end and server instances:
 
-- [**Million Song Library Project Documentation**](https://github.com/kenzanmedia/million-song-library/tree/develop/docs) – Overview of the Million Song Library microservice-based architecture as well as step-by-step instructions for running the MSL demonstration locally or deploying it to AWS.
+1. Change to the the `/million-song-library/server` directory.
+2. Run the Maven file to set up the server:
 
-- [**API Documentation**](https://github.com/kenzanmedia/million-song-library/blob/develop/docs/swagger/index.html) – Million Song Library API documentation, generated using Swagger.
+   ```
+   mvn clean compile
+   ```
+   
+3. Open a new terminal window and start Cassandra:
 
-- [**Service Documentation**](https://github.com/kenzanmedia/million-song-library/tree/develop/docs) – Description of the classes and methods for each Million Song Library microservice, generated using Javadoc.
+   ```
+   sh /<path_to>/dsc-cassandra-2.1.11/bin/cassandra
+   ```
+   
+4. Enter the Cassandra console:
 
-- [**Client/UI Documentation**](https://github.com/kenzanmedia/million-song-library/tree/develop/docs) – Classes, functions, and variables for the Million Song Library client/UI, generated using ESDoc.
+   ```
+   sh /<path_to>/dsc-cassandra-2.1.11/bin/cqlsh
+   ```
+   
+5. Import the Million Song Library data:
 
-- [**CSS Style Guide**](https://github.com/kenzanmedia/million-song-library/tree/develop/docs) – CSS styles used in the Million Song Library client/UI, generated using KSS.
-
-## Viewing AsciiDoc Documentation
-
-The Million Song Library project documentation is written using [AsciiDoc](http://www.methods.co.nz/asciidoc/), a plain-text markup format for authoring documentation. The documentation was rendered to HTML and PDF formats using the [Asciidoctor](http://asciidoctor.org/) and [Asciidoctor-pdf processors](https://github.com/asciidoctor/asciidoctor-pdf).
-
-Alternately, you can use the [Asciidoctor.js Live Preview](https://chrome.google.com/webstore/detail/asciidoctorjs-live-previe/iaalpfgpbocpdfblpnhhgllgbdbchmia) extension for Chrome to view AsciiDoc (.adoc) files without rendering them.
-
-1. In Chrome, install the [Asciidoctor.js Live Preview](https://chrome.google.com/webstore/detail/asciidoctorjs-live-previe/iaalpfgpbocpdfblpnhhgllgbdbchmia) extension.
-
-2. Navigate to the **chrome://extensions/** page (or select **Menu > More Tools > Extensions**).
-
-3. Under the **Asciidoctor.js Live Preview** extension, select the **Allow access to file URLs** checkbox.
-
-4. To view a local AsciiDoc (.adoc) file, open it in Chrome, or drag the file into the Chrome window.
+   ```
+   SOURCE 'msl_ddl_latest.cql';
+   SOURCE 'msl_dat_latest.cql';
+   ```
+   
