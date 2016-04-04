@@ -1,73 +1,29 @@
-# MSL Catalog Edge
+# MSL Microservices
 
-This repository is a sub-repository of the [Kenzan Million Song Library](https://github.com/kenzanmedia/million-song-library) (MSL) project, a microservices-based Web application built using [AngularJS](https://angularjs.org/), a [Cassandra](http://cassandra.apache.org/) NoSQL database, and [Netflix OSS](http://netflix.github.io/) tools.
+The Million Song Library demonstration uses the following microservices:
 
-> **NOTE:** For an overview of the Million Song Library microservices architecture, as well as step-by-step instructions for running the MSL demonstration, see the [Million Song Library Project Documentation](https://github.com/kenzanmedia/million-song-library/tree/develop/docs).
+- [msl-account-data-client](https://github.com/kenzanmedia/msl-account-data-client)
+- [msl-account-edge](https://github.com/kenzanmedia/msl-account-edge)
+- [msl-catalog-data-client](msl-catalog-data-client)
+- [msl-catalog-edge](https://github.com/kenzanmedia/msl-catalog-edge)
+- [msl-login-edge](https://github.com/kenzanmedia/msl-login-edge)
+- [msl-ratings-data-client](https://github.com/kenzanmedia/msl-ratings-data-client)
+- [msl-ratings-edge](https://github.com/kenzanmedia/msl-ratings-edge)
 
-## Overview
+Each microservice is maintained in a separate sub-repository. Configuration for each service (except for **msl-ratings-edge**) is also maintained in a separate sub-repository.
 
-You can run build all of the MSL microservices by running `mvn clean compile` from the `server` directory of the main [million-song-library](https://github.com/kenzanmedia/million-song-library/tree/develop/server) repository. Or use the commands below to build, run, and test a single microservice.
+> **NOTE:** Common components used across all microservices are maintained in the **msl-server-common** sub-repository.
 
-> **NOTE:** If you receive an error when running any of the commands below, try using `sudo` (Mac and Linux) or run PowerShell as an administrator (Windows).
+## Build Script
 
-## Server Generation
-
-Use the following command to generate server source code from the Swagger definition, run tests, and install dependencies:
-
-```
-mvn -P build clean generate-sources install
-```
-
-Use the following command to run the server on port `9003`:
+You can build all of the MSL microservices at once by running the Maven build script from the `/server` directory of the main [million-song-library](https://github.com/kenzanmedia/million-song-library/tree/develop/server) repository:
 
 ```
-mvn -P dev clean jetty:run
+mvn clean compile 
 ```
 
-To verify that the server is running, first [start Cassandra](https://github.com/kenzanmedia/million-song-library/tree/develop/tools/cassandra), and then access the following URL:
+The build script will generate server source code from the Swagger definition, package local jars, and install the services in the local repository.
 
-http://msl.kenzanlabs.com:9003/catalog-edge/browse/album
+To build, run, and test a single microservice, see the README in each microservice sub-repository.
 
-## Code Formatting
-
-If you make changes to the application code, use the following command to format the code according to [project styles and standards](https://github.com/kenzanmedia/styleguide):
-
-```
-mvn clean formatter:format
-```
-
-## Dependencies
-
-Use the following command to install dependencies without running tests:
-
-```
-mvn -P no-tests clean install
-```
-
-## JAR Packaging
-
-Use the following command to package the application code:
-
-```
-mvn -P no-tests package
-```
-
-## Testing and Reports
-
-You can use either Cobertura or EclEmma to run tests, whichever you prefer.
-
-### Cobertura
-
-Use the following command to run all unit tests and generate a report on test coverage (report is located in `/target/site/cobertura/index.html`):
-
-```
-mvn cobertura:cobertura
-```
-
-### EclEmma 
-
-Use the following command to run all unit tests and generate a report on test coverage (report is located in `/target/site/jacoco`):
-
-```
-mvn package
-```
+> **NOTE:** If you receive an error when running the build script, try using `sudo` (Mac and Linux) or run PowerShell as an administrator (Windows).
