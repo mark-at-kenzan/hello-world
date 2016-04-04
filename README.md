@@ -4,7 +4,7 @@ The Million Song Library demonstration uses the following microservices:
 
 - [msl-account-data-client](https://github.com/kenzanmedia/msl-account-data-client)
 - [msl-account-edge](https://github.com/kenzanmedia/msl-account-edge)
-- [msl-catalog-data-client](msl-catalog-data-client)
+- [msl-catalog-data-client](https://github.com/kenzanmedia/msl-catalog-data-client)
 - [msl-catalog-edge](https://github.com/kenzanmedia/msl-catalog-edge)
 - [msl-login-edge](https://github.com/kenzanmedia/msl-login-edge)
 - [msl-ratings-data-client](https://github.com/kenzanmedia/msl-ratings-data-client)
