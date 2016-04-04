@@ -24,7 +24,7 @@ To build the client/UI, run the following command from the `/msl-pages` director
 npm run build
 ```
 
-This will create new source files and place them in `./build` directory. To use the source file, mount them on any server, or use the `npm run full-dev` command (see the [Dev Server](#Dev-Server) section below).
+This will create new source files and place them in `./build` directory. To use the source file, mount them on any server, or use the `npm run full-dev` command (see the [Dev Server](#dev-server) section below).
 
 
 In order to run micro-service dependencies run the npm task `npm run build-server`. Optionally run `npm run build-and-serve` for
