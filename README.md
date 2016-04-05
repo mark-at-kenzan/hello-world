@@ -18,7 +18,7 @@ To install the client/UI, run the following command from the `/msl-pages` direct
 npm install
 ```
 
-This will install `npm` dependencies as well as run `bower install` for [Bower](https://github.com/bower/bower) dependencies.
+This will install npm dependencies as well as run `bower install` for [Bower](https://github.com/bower/bower) dependencies.
 
 ## Build
 
